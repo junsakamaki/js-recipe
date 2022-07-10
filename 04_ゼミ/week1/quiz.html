@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>WebExpertコーステンプレート</title>
+  </head>
+  <body>
+    <h1>東工大出身者は誰？</h1>
+    <button id="button1">田中角栄</button>
+    <button id="button2">菅直人</button>
+    <button id="button3">ドナルド・トランプ</button>
+    <div id="answer">選んで</div>
+    <script>
+      const button1 = document.getElementById("button1")
+      const button2 = document.getElementById("button2")
+      const button3 = document.getElementById("button3")
+      const answer = document.getElementById("answer")
+      button1.onclick = function () {
+        answer.textContent = "違うよ！！！！"
+      }
+      button2.onclick = function () {
+        answer.textContent = "正解。やるじゃん？？？"
+      }
+      button3.onclick = function () {
+        answer.textContent = "そんなわけなくない？"
+      }
+    </script>
+  </body>
+</html>
