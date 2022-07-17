@@ -4,16 +4,17 @@ const memoContainer = document.getElementById("memo-container")
 
 //追加ボタンを押す
 addButton.onclick = function () {
-  //入力をinputに格納
-  const input = memoInput.value
-  //コンソールに表示
-  console.log(input)
-
-  //memoを作成
-  const memo = document.createElement("div")
-  memo.textContent = input
+  const memo = createMemo(memoInput.value)
   //memoをcontainerに追加
   memoContainer.append(memo)
+  //入力欄を空に
+  memoInput.value = ""
+}
+
+const createMemo = function (text) {
+  //memoを作成
+  const memo = document.createElement("div")
+  memo.textContent = text
 
   //削除ボタン作成
   const deleteButton = document.createElement("button")
@@ -25,6 +26,5 @@ addButton.onclick = function () {
   //memoの中に削除ボタン追加
   memo.append(deleteButton)
 
-  //入力欄を空に
-  memoInput.value = ""
+  return memo
 }
