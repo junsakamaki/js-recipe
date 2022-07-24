@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>配列を使ったメモアプリ</title>
+  </head>
+  <body>
+    <h2>配列を使ったメモアプリ</h2>
+    <input type="text" id="memo-input" />
+    <button id="add-button">保存</button>
+    <button id="sort-button">並び替える</button>
+    <div id="memo-container"></div>
+    <script>
+      const memoInput = document.getElementById("memo-input")
+      const addButton = document.getElementById("add-button")
+      const memoContainer = document.getElementById("memo-container")
+
+      const updateMemo = function () {
+        memoContainer.textContent = ""
+
+        for (let i = 0; i < memo.length; i++) {
+          const div = document.createElement("div")
+          const deleteButton = document.createElement("button")
+          div.textContent = memo[i].text
+          div.id = memo[i].id
+          deleteButton.textContent = "削除"
+          deleteButton.onclick = function () {
+            const id = document.getElementById(memo[i].id)
+            id.remove()
+            deleteButton.remove()
+          }
+          memoContainer.append(div)
+          memoContainer.append(deleteButton)
+        }
+      }
+
+      // 3-1 メモ用の配列
+      let memo = []
+      if (localStorage.memo) {
+        const memoJson = localStorage.memo
+        memo = JSON.parse(memoJson)
+      }
+      updateMemo()
+
+      addButton.onclick = function () {
+        // inputに入力した内容を取得する
+        memo.push({
+          text: memoInput.value,
+          id: Math.random().toString(16),
+        })
+        localStorage.memo = JSON.stringify(memo)
+        console.log(memo)
+        updateMemo()
+        // 取得した内容をDOMに反映する
+        // const div = document.createElement("div");
+        // div.textContent = text;
+        // memoContainer.append(div);
+      }
+
+      const sortButton = document.getElementById("sort-button")
+      sortButton.onclick = function () {
+        memo.sort(function (x, y) {
+          return x.text < y.text ? -1 : 1
+        })
+        // sortは2引数の関数を受け付ける(x, y)
+        // if (x.text < y.text) {
+        //  -1
+        //} else {
+        //  1
+        //}
+        // => xのテキストがyのテキストより先のとき-1, yがxより先のとき1とすると
+        // sortがいい感じに入れ替えてくれる
+        updateMemo()
+      }
+    </script>
+  </body>
+</html>
